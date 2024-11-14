@@ -3,12 +3,12 @@ import { Patients } from '../../interfaces/patients';
 import { PatientsService } from '../../services/patients.service';
 
 @Component({
-  selector: 'app-patients',
-  templateUrl: './patients.component.html',
-  styleUrls: ['./patients.component.css']
+  selector: 'app-patient-list',
+  templateUrl: './patient-list.component.html',
+  styleUrls: ['./patient-list.component.css']
 })
-export class PatientsComponent implements OnInit{
-  
+export class PatientListComponent  implements OnInit{
+
   patients: Patients[] = [];  // Array para almacenar los pacientes
 
   displayedColumns: string[] = ['codigo', 'descripcion', 'precio', 'acciones'];
@@ -55,4 +55,5 @@ export class PatientsComponent implements OnInit{
     //   }
     // });
   }
+
 }

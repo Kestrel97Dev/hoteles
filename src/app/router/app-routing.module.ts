@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from '../layout/pages/layout-page/layout.component';
 
 const routes: Routes = [
 
   {
-    path:'hotel',
-    loadChildren: () => import('../hotel/hotel.module').then( m => m.HotelModule),
+    path:'',
+    component: LayoutComponent,
+    loadChildren: () => import('../layout/layout.module').then( m => m.LayOutModule),
   },
   {
     path:'',
-    redirectTo: 'hotel',
+    redirectTo: '',
     pathMatch: 'full',
   },
   {
