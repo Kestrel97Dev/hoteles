@@ -22,7 +22,8 @@ export class PatientListComponent  implements OnInit{
 
   // Método para cargar los pacientes desde el localStorage
   loadPatients(): void {
-    this.patients = this.patientsService.getPatients();
+    this.patientsService.getPatients()
+    .subscribe(patients => this.patients = patients);
   }
 
   // Método para agregar un paciente
@@ -39,7 +40,7 @@ export class PatientListComponent  implements OnInit{
 
   // Método para actualizar un paciente
   updatePatient(id: number, updatedPatient: Patients): void {
-    this.patientsService.updatePatient(id, updatedPatient);
+    this.patientsService.updatePatient(updatedPatient);
     this.loadPatients();  // Recargar la lista de pacientes
   }
 

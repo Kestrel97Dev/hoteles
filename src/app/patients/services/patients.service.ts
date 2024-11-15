@@ -1,37 +1,39 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Patients } from '../interfaces/patients';
+import { environmenst } from '../../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientsService {
-  private storageKey = 'patients';  // Cambié el nombre a "patients" para que coincida con el modelo
+
+  private baseUrl: string = environmenst.baseUrl;
+
+  constructor(private http: HttpClient) { }
 
   // Obtener todos los pacientes
-  getPatients(): Patients[] {
-    const data = localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : [];
+  getPatients(): Observable<Patients[]> {
+    return this.http.get<Patients[]>(`${this.baseUrl}/list-patient`);
   }
 
-  // Agregar un nuevo paciente
-  addPatient(patient: Patients): void {
-    const patients = this.getPatients();
-    patients.push(patient);
-    localStorage.setItem(this.storageKey, JSON.stringify(patients));
+  addPatient(patients: Patients): Observable<Patients> {
+    return this.http.post<Patients>(`${this.baseUrl}/list-patient`, patients);
   }
 
-  // Actualizar un paciente existente
-  updatePatient(id: number, updatedPatient: Patients): void {
-    const patients = this.getPatients().map(p =>
-      p.id === id ? updatedPatient : p
-    );
-    localStorage.setItem(this.storageKey, JSON.stringify(patients));
+  updatePatient(patients: Patients): Observable<Patients> {
+    if (!patients.id) throw Error('Patients id is required')
+    return this.http.patch<Patients>(`${this.baseUrl}/list-patient/${patients.id}`, patients);
   }
 
-  // Eliminar un paciente
-  deletePatient(id: number): void {
-    const patients = this.getPatients().filter(p => p.id !== id);
-    localStorage.setItem(this.storageKey, JSON.stringify(patients));
+  deletePatient(id: number): Observable<boolean> {
+    return this.http.delete(`${this.baseUrl}/list-patient/${id}`)
+      .pipe(
+        map(resp => true),
+        catchError(err => of(false)),
+      );
   }
+
 
 }

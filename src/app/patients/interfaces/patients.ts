@@ -9,6 +9,5 @@ export interface Patients {
     phoneNumber?: string;              // Teléfono del paciente (opcional)
     email?: string;                    // Email del paciente (opcional)
     medicalInfo?: string;              // Información médica del paciente (opcional)
-    staId?: number;                    // Estado o identificador de estatus del paciente (opcional)
     profilePicture?: Blob;             // Foto de perfil del paciente (opcional)
 }

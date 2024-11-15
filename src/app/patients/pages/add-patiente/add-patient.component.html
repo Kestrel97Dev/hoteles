@@ -1,0 +1,86 @@
+<div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h1>Agregar Paciente</h1></mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <form [formGroup]="patientForm" (ngSubmit)="onSavePatient()">
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+                <!-- Columna de la izquierda: Foto de perfil -->
+                <table class="example-full-width" cellspacing="0"><tr>
+                <td>
+                    <div fxFlex="30%">
+                        <mat-card class="profile-picture-card">
+                            <mat-card-content>
+                            <img *ngIf="profilePicture" [src]="profilePicture | safeUrl" alt="Profile Picture" width="100%" height="auto">
+                            <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;" #fileInput>
+                            <button mat-raised-button color="primary" (click)="fileInput.click()">Subir Foto</button>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                <td>
+                <!-- Columna de la derecha: Datos del paciente -->
+                    <div fxFlex="70%">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="firstName" required>
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput formControlName="lastName" required>
+                        </mat-form-field>
+                        <p>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Género</mat-label>
+                            <mat-select formControlName="gender">
+                            <mat-option value="male">Masculino</mat-option>
+                            <mat-option value="female">Femenino</mat-option>
+                            <mat-option value="other">Otro</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <p>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Fecha de Nacimiento</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="birthDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <p>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Nacionalidad</mat-label>
+                            <input matInput formControlName="nationality">
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput formControlName="address">
+                        </mat-form-field>
+                        <p>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput formControlName="phoneNumber">
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" type="email">
+                        </mat-form-field>
+                        <p>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Información Médica</mat-label>
+                            <textarea matInput formControlName="medicalInfo"></textarea>
+                        </mat-form-field>
+                    </div>
+                </tr></table>
+            </div>
+          <!-- Botón de Guardar -->
+          <div class="button-group" style="margin-top: 20px;">
+            <button mat-raised-button color="primary" type="submit">Guardar</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
