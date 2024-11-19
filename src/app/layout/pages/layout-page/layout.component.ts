@@ -9,5 +9,6 @@ export class LayoutComponent {
   public sidebarItems = [
     { label: 'Home', icon: 'home', url: './dashboard' },
     { label: 'patients', icon: 'patient_list', url: './list-patient' },
+    { label: 'Rooms', icon: 'patient_list', url: '/rooms' },
   ];
 }
