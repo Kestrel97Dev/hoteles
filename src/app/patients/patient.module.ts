@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PatientListComponent } from './pages/patient-list/patient-list.component';
 import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
-import { AddPatientComponent } from './pages/add-patiente/add-patient.component';
+import { PatientFormComponent } from './pages/add-patiente/patient-form.component';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../material/material.module';
-import { MenuRoutingModule } from '../layout/router/menu-routing.module';
+import { MaterialModule } from '../material/material.module';;
+import { PatientRoutingModule } from './router/patient-routing.module';
 
 @NgModule({
   declarations: [
     PatientListComponent,
     ConfirmDialogComponent,
-    AddPatientComponent,
+    PatientFormComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    MenuRoutingModule
+    
+    PatientRoutingModule,
   ]
 })
 export class PatientsModule { }

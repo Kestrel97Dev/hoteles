@@ -9,10 +9,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-patient',
-  templateUrl: './add-patient.component.html',
-  styleUrls: ['./add-patient.component.css']
+  templateUrl: './patient-form.component.html',
+  styleUrls: ['./patient-form.component.css']
 })
-export class AddPatientComponent implements OnInit{
+export class PatientFormComponent implements OnInit{
 
   constructor(
     private activateRouter: ActivatedRoute,
