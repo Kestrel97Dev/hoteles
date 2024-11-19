@@ -4,6 +4,8 @@ import { LayoutComponent } from '../pages/layout-page/layout.component';
 import { PatientListComponent } from 'src/app/patients/pages/patient-list/patient-list.component';
 import { DashboardPageComponent } from 'src/app/dashboard/pages/dashboard-page/dashboard-page.component';
 import { AddPatientComponent } from 'src/app/patients/pages/add-patiente/add-patient.component';
+import { RoomsModule } from '../../rooms/room.module';
+
 const routes: Routes = [
   {
     path: '',
@@ -14,6 +16,10 @@ const routes: Routes = [
       { path: 'edit-patient/:id', component: AddPatientComponent},
 
       { path: 'dashboard', component: DashboardPageComponent},
+      {
+        path:'rooms',
+        loadChildren: () => import('../../rooms/room.module').then( m => m.RoomsModule),
+      },
 
       { path: '**', redirectTo: 'dashboard'}
     ]
