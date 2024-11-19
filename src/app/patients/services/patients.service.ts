@@ -18,6 +18,13 @@ export class PatientsService {
     return this.http.get<Patients[]>(`${this.baseUrl}/list-patient`);
   }
 
+  getPatientsById(id:string):Observable <Patients|undefined>{
+    return this.http.get<Patients>(`${this.baseUrl}/list-patient/${id}`)
+        .pipe(
+            catchError( error => of(undefined) )
+        );
+  }
+
   addPatient(patients: Patients): Observable<Patients> {
     return this.http.post<Patients>(`${this.baseUrl}/list-patient`, patients);
   }

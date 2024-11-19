@@ -1,64 +1,82 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientsService } from '../../services/patients.service';
-import { Patients } from '../../interfaces/patients';
+import { Gender, Patients } from '../../interfaces/patients';
+import { switchMap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-patient',
   templateUrl: './add-patient.component.html',
   styleUrls: ['./add-patient.component.css']
 })
-export class AddPatientComponent {
-  patientForm: FormGroup;
-  profilePicture: any;
+export class AddPatientComponent implements OnInit{
 
   constructor(
-    private fb: FormBuilder,
+    private activateRouter: ActivatedRoute,
     private router: Router,
-    private patientsService: PatientsService
-  ) {
-    this.patientForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      gender: [''],
-      birthDate: [''],
-      nationality: [''],
-      address: [''],
-      phoneNumber: [''],
-      email: ['', [Validators.email]],
-      medicalInfo: [''],
-      staId: ['']
+    private patientsService: PatientsService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) {}
+
+  public patientForm = new FormGroup({
+    id: new FormControl<string>(''),
+    firstName: new FormControl<string>('',{nonNullable:true}),
+    lastName: new FormControl<string>('',{nonNullable:true}),                 
+    gender:new FormControl<Gender>(Gender.Other),                  
+    birthDate:new FormControl(''),                 
+    nationality:new FormControl(''),             
+    address:new FormControl(''),                  
+    phoneNumber:new FormControl(''),               
+    email:new FormControl(''),                    
+    medicalInfo:new FormControl(''),              
+    profilePicture:new FormControl('')
+    
+  })
+
+  get currentPatients(): Patients {
+    const patient = this.patientForm.value as Patients;
+    return patient;
+  }
+
+  ngOnInit(): void {
+      if(!this.router.url.includes('edit'))return;
+      this.activateRouter.params
+      .pipe(
+        switchMap(({id}) => this.patientsService.getPatientsById(id))
+      ).subscribe( patients => {
+        if(!patients) return this.router.navigateByUrl('/');
+        this.patientForm.reset( patients as Object);
+        return;
+      })
+  }
+
+  onSubmit():void{
+    if(this.patientForm.invalid) return;
+
+    if(this.currentPatients.id){
+      this.patientsService.updatePatient(this.currentPatients)
+      .subscribe( patients => {
+        this.showSnackbar(`${patients.firstName} updated!`)
+      });
+      return
+    }
+
+    this.patientsService.addPatient(this.currentPatients)
+    .subscribe( patients => {
+        this.router.navigate(['/list-patient/edit',patients.id]);
+        this.showSnackbar(`${patients.firstName} created!`);
+    })
+  }
+
+  showSnackbar(message: string):void {
+    this.snackBar.open(message, 'done',{
+      duration:2500,
     });
   }
-  
-  onFileSelected(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      this.profilePicture = file;
-    }
-  }
-
-  onSavePatient(): void {
-    if (this.patientForm.valid) {
-      const newPatient: Patients = {
-        ...this.patientForm.value,
-        profilePicture: this.profilePicture ? this.profilePicture : null,
-        // Puedes agregar más propiedades si es necesario
-      };
-
-      // Llamamos al servicio para agregar el paciente
-      this.patientsService.addPatient(newPatient).subscribe({
-        next: (savedPatient) => {
-          console.log('Paciente guardado:', savedPatient);
-          // Redirigir a la lista de pacientes
-          this.router.navigate(['/patients/list-patient']);
-        },
-        error: (err) => {
-          console.error('Error al guardar paciente:', err);
-        }
-      });
-    }
-  }
+ 
 }
  
