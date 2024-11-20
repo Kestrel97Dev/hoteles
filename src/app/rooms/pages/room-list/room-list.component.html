@@ -1,6 +1,41 @@
-<div class="list-room-container">
-  <h1>List of Rooms</h1>
-  <button mat-raised-button color="primary" [routerLink]="['/rooms/add']">
-    Add Room
-  </button>
+<div class="container">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title><h1>list of rooms</h1></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <table mat-table [dataSource]="rooms" class="mat-elevation-z8" *ngIf="rooms.length > 0; else noRows">
+
+        <ng-container matColumnDef="number">
+          <th mat-header-cell *matHeaderCellDef class="th-tittle"> Number </th>
+          <td mat-cell *matCellDef="let room"> {{ room.number }} </td>
+        </ng-container>
+
+        <!-- Acciones (Editar y Borrar) -->
+        <!-- <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef class="th-tittle"> Acciones </th>
+          <td mat-cell *matCellDef="let patient">
+            <button mat-raised-button color="warn" (click)="deletePatient(patient.id)">Borrar</button>
+            <span class="spacer"></span>
+            <button mat-raised-button class="button-warn" (click)="updatePatient(patient.id, patient)">Editar</button>
+          </td>
+        </ng-container> -->
+
+        <!-- Fila de encabezado y filas de datos -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <ng-template #noRows>
+        <p>There are no rooms.</p>
+      </ng-template>
+    </mat-card-content>
+
+    <mat-card-footer class="example-card-footer">
+      <div class="button-group">
+        <button mat-raised-button color="button-succes" [routerLink]="['/rooms/add']">Add Room</button>
+      </div>
+    </mat-card-footer>
+  </mat-card>
 </div>
