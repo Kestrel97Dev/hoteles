@@ -77,6 +77,19 @@ export class PatientFormComponent implements OnInit{
       duration:2500,
     });
   }
+  
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.patientForm.patchValue({
+        profilePicture: file // Asigna el archivo directamente a profilePicture
+      });
+    }
+  }
+
+  getImageUrl(blob: Blob): string {
+    return URL.createObjectURL(blob);
+  }
  
 }
  
