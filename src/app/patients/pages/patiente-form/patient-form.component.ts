@@ -67,7 +67,7 @@ export class PatientFormComponent implements OnInit {
 
     this.patientsService.addPatient(this.currentPatients)
       .subscribe(patients => {
-        this.router.navigate(['/patient/list', patients.id]);
+        this.router.navigate(['/patient/list']);
         this.showSnackbar(`${patients.firstName} created!`);
       })
   }
