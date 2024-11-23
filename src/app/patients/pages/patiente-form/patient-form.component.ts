@@ -48,7 +48,7 @@ export class PatientFormComponent implements OnInit{
       .pipe(
         switchMap(({id}) => this.patientsService.getPatientsById(id))
       ).subscribe( patients => {
-        if(!patients) return this.router.navigateByUrl('/');
+        if(!patients) return this.router.navigateByUrl('/list');
         this.patientForm.reset( patients as Object);
         return;
       })
@@ -67,7 +67,7 @@ export class PatientFormComponent implements OnInit{
 
     this.patientsService.addPatient(this.currentPatients)
     .subscribe( patients => {
-        this.router.navigate(['/list-patient/edit',patients.id]);
+        this.router.navigate(['/patient/list',patients.id]);
         this.showSnackbar(`${patients.firstName} created!`);
     })
   }
@@ -76,6 +76,19 @@ export class PatientFormComponent implements OnInit{
     this.snackBar.open(message, 'done',{
       duration:2500,
     });
+  }
+  
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.patientForm.patchValue({
+        profilePicture: file // Asigna el archivo directamente a profilePicture
+      });
+    }
+  }
+
+  getImageUrl(blob: Blob): string {
+    return URL.createObjectURL(blob);
   }
  
 }
