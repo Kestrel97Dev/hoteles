@@ -11,7 +11,13 @@ export class PatientListComponent  implements OnInit{
 
   patients: Patients[] = [];  // Array para almacenar los pacientes
 
-  displayedColumns: string[] = ['Nombre', 'Teléfono', 'Correo', 'acciones'];
+  displayedColumns: string[] = 
+  [
+    'nombre', 
+    'telefono', 
+    'email', 
+    'acciones'
+  ];
 
   constructor(private patientsService: PatientsService) {}
 

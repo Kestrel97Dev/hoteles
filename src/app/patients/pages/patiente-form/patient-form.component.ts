@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './patient-form.component.html',
   styleUrls: ['./patient-form.component.css']
 })
-export class PatientFormComponent implements OnInit{
+export class PatientFormComponent implements OnInit {
 
   constructor(
     private activateRouter: ActivatedRoute,
@@ -20,21 +20,21 @@ export class PatientFormComponent implements OnInit{
     private patientsService: PatientsService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   public patientForm = new FormGroup({
-    id: new FormControl<string>(''),
-    firstName: new FormControl<string>('',{nonNullable:true}),
-    lastName: new FormControl<string>('',{nonNullable:true}),                 
-    gender:new FormControl<Gender>(Gender.Other),                  
-    birthDate:new FormControl(''),                 
-    nationality:new FormControl(''),             
-    address:new FormControl(''),                  
-    phoneNumber:new FormControl(''),               
-    email:new FormControl(''),                    
-    medicalInfo:new FormControl(''),              
-    profilePicture:new FormControl('')
-    
+    id:             new FormControl<string>(''),
+    firstName:      new FormControl<string>('', { nonNullable: true }),
+    lastName:       new FormControl<string>('', { nonNullable: true }),
+    gender:         new FormControl<Gender>(Gender.Other),
+    birthDate:      new FormControl(''),
+    nationality:    new FormControl(''),
+    address:        new FormControl(''),
+    phoneNumber:    new FormControl(''),
+    email:          new FormControl(''),
+    medicalInfo:    new FormControl(''),
+    profilePicture: new FormControl('')
+
   })
 
   get currentPatients(): Patients {
@@ -43,41 +43,41 @@ export class PatientFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      if(!this.router.url.includes('edit'))return;
-      this.activateRouter.params
+    if (!this.router.url.includes('edit')) return;
+    this.activateRouter.params
       .pipe(
-        switchMap(({id}) => this.patientsService.getPatientsById(id))
-      ).subscribe( patients => {
-        if(!patients) return this.router.navigateByUrl('/list');
-        this.patientForm.reset( patients as Object);
+        switchMap(({ id }) => this.patientsService.getPatientsById(id))
+      ).subscribe(patients => {
+        if (!patients) return this.router.navigateByUrl('/list');
+        this.patientForm.reset(patients as Object);
         return;
       })
   }
 
-  onSubmit():void{
-    if(this.patientForm.invalid) return;
+  onSubmit(): void {
+    if (this.patientForm.invalid) return;
 
-    if(this.currentPatients.id){
+    if (this.currentPatients.id) {
       this.patientsService.updatePatient(this.currentPatients)
-      .subscribe( patients => {
-        this.showSnackbar(`${patients.firstName} updated!`)
-      });
+        .subscribe(patients => {
+          this.showSnackbar(`${patients.firstName} updated!`)
+        });
       return
     }
 
     this.patientsService.addPatient(this.currentPatients)
-    .subscribe( patients => {
-        this.router.navigate(['/patient/list',patients.id]);
+      .subscribe(patients => {
+        this.router.navigate(['/patient/list', patients.id]);
         this.showSnackbar(`${patients.firstName} created!`);
-    })
+      })
   }
 
-  showSnackbar(message: string):void {
-    this.snackBar.open(message, 'done',{
-      duration:2500,
+  showSnackbar(message: string): void {
+    this.snackBar.open(message, 'done', {
+      duration: 2500,
     });
   }
-  
+
   onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -90,6 +90,5 @@ export class PatientFormComponent implements OnInit{
   getImageUrl(blob: Blob): string {
     return URL.createObjectURL(blob);
   }
- 
+
 }
- 

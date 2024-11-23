@@ -37,8 +37,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSnackBarModule,
     MatTableModule,    
     MatDatepickerModule,
-    MatNativeDateModule,
-    
+    MatNativeDateModule,   
   ]
 })
 export class MaterialModule { }

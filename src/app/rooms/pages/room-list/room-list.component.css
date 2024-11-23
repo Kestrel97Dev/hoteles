@@ -1,5 +1,16 @@
 .th-tittle{
+  background-color: #1976d2;
+  color: white;
+}
 
+.button-warn {
+  background-color: yellow;
+  color: black;
+}
+
+.button-succes {
+  background-color: green;
+  color: white;
 }
 
 .spacer {

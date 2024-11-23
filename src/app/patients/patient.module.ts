@@ -5,12 +5,14 @@ import { PatientFormComponent } from './pages/patiente-form/patient-form.compone
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';;
 import { PatientRoutingModule } from './router/patient-routing.module';
+import { PatientsImagePipe } from './pipes/patient-image.pipe';
 
 @NgModule({
   declarations: [
     PatientListComponent,
     ConfirmDialogComponent,
     PatientFormComponent,
+    PatientsImagePipe,
   ],
   imports: [
     CommonModule,

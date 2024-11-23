@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../pages/layout-page/layout.component';
-import { PatientListComponent } from 'src/app/patients/pages/patient-list/patient-list.component';
 import { DashboardPageComponent } from 'src/app/dashboard/pages/dashboard-page/dashboard-page.component';
-import { PatientFormComponent } from 'src/app/patients/pages/patiente-form/patient-form.component';
-import { RoomsModule } from '../../rooms/room.module';
-
 const routes: Routes = [
   {
     path: '',

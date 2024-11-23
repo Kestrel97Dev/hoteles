@@ -9,7 +9,7 @@ export interface Patients {
     phoneNumber?: string;              // Teléfono del paciente (opcional)
     email?: string;                    // Email del paciente (opcional)
     medicalInfo?: string;              // Información médica del paciente (opcional)
-    profilePicture?: Blob;             // Foto de perfil del paciente (opcional)
+    profilePicture?: string;             // Foto de perfil del paciente (opcional)
 }
 
 export enum Gender{

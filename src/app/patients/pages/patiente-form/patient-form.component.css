@@ -11,10 +11,10 @@
   gap: 20px;
 }
 
-.form-column {
+/* .form-column {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .full-width {
   width: 100%;
@@ -52,4 +52,35 @@
   .form-grid {
     grid-template-columns: 1fr; /* Una columna para los campos del formulario */
   }
+}
+
+/* Estilos CSS */
+.mat-grid-list {
+  width: 100%;
+}
+
+.form-container {
+  display: flex; /* Makes the form container a flexbox */
+  flex-direction: row; /* Arranges form columns side-by-side */
+}
+
+.form-column {
+  flex: 1; /* Makes form columns take equal space */
+  padding: 1rem; /* Adds padding to form columns */
+}
+
+/* Media query para ajustar el diseño en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .mat-grid-list {
+    cols: 1;
+  }
+  .form-column {
+    width: 100%;
+  }
+}
+
+.mat-grid-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Defines 4 equal columns */
+  gap: 1rem; /* Adds spacing between columns */
 }
