@@ -10,7 +10,15 @@ import { RoomsService } from '../../services/rooms.service';
 export class RoomListComponent implements OnInit {
 
   rooms: Room [] = [];
-  displayedColumns: string[] = ['number', 'category', 'quota', 'cost', 'details', 'vacant', 'actions'];
+  displayedColumns: string[] = [
+    'number',
+    'category',
+    'quota',
+    'cost',
+    'details',
+    'vacant',
+    'actions'
+  ];
 
   constructor(private roomsService: RoomsService) {}
 
@@ -21,6 +29,10 @@ export class RoomListComponent implements OnInit {
   loadRooms(): void {
     this.roomsService.getAllRooms()
     .subscribe(rooms => this.rooms = rooms);
+  }
+
+  hayRegistros() {
+    return this.rooms.length > 0;
   }
 
 }

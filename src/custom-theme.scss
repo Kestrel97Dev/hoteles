@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$hoteles-primary: mat.define-palette(mat.$blue-palette, 800);
+$hoteles-accent: mat.define-palette(mat.$yellow-palette, A200);
+$hoteles-warn: mat.define-palette(mat.$red-palette, A200);
+$hoteles-success: mat.define-palette(mat.$green-palette, A200);
+
+$hoteles-theme: mat.define-light-theme((
+  color: (
+    primary: $hoteles-primary,
+    accent: $hoteles-accent,
+    warn: $hoteles-warn,
+    success: $hoteles-success,
+  )
+));
+
+@include mat.all-component-themes($hoteles-theme);
+

@@ -5,22 +5,49 @@
     </mat-card-header>
 
     <mat-card-content>
-      <table mat-table [dataSource]="rooms" class="mat-elevation-z8" *ngIf="rooms.length > 0; else noRows">
+      <table mat-table [dataSource]="rooms" class="mat-elevation-z8" *ngIf="hayRegistros(); else noRows">
 
         <ng-container matColumnDef="number">
-          <th mat-header-cell *matHeaderCellDef class="th-tittle"> Number </th>
+          <th mat-header-cell *matHeaderCellDef> Number </th>
           <td mat-cell *matCellDef="let room"> {{ room.number }} </td>
         </ng-container>
 
-        <!-- Acciones (Editar y Borrar) -->
-        <!-- <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef class="th-tittle"> Acciones </th>
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let room"> {{ room.category.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quota">
+          <th mat-header-cell *matHeaderCellDef> Quota </th>
+          <td mat-cell *matCellDef="let room"> {{ room.quota }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cost">
+          <th mat-header-cell *matHeaderCellDef> Cost </th>
+          <td mat-cell *matCellDef="let room"> {{ room.cost }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef> Details </th>
+          <td mat-cell *matCellDef="let room"> {{ room.details }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vacant">
+          <th mat-header-cell *matHeaderCellDef> Vacant </th>
+          <td mat-cell *matCellDef="let room"> {{ room.vacant }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
           <td mat-cell *matCellDef="let patient">
-            <button mat-raised-button color="warn" (click)="deletePatient(patient.id)">Borrar</button>
+
+            <button mat-raised-button color="warn">Borrar</button>
+
             <span class="spacer"></span>
-            <button mat-raised-button class="button-warn" (click)="updatePatient(patient.id, patient)">Editar</button>
+
+            <button mat-raised-button color="accent" >Editar</button>
           </td>
-        </ng-container> -->
+        </ng-container>
 
         <!-- Fila de encabezado y filas de datos -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -32,9 +59,9 @@
       </ng-template>
     </mat-card-content>
 
-    <mat-card-footer class="example-card-footer">
+    <mat-card-footer class="card-footer">
       <div class="button-group">
-        <button mat-raised-button color="button-succes" [routerLink]="['/rooms/add']">Add Room</button>
+        <button mat-raised-button color="success" [routerLink]="['/rooms/add']">Add Room</button>
       </div>
     </mat-card-footer>
   </mat-card>
