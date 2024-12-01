@@ -1,0 +1,50 @@
+.th-tittle{
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .button-warn {
+    background-color: yellow;
+    color: black;
+  }
+  
+  .button-succes {
+    background-color: green;
+    color: white;
+  }
+  
+  .spacer {
+    display: inline-block;
+    width: 50px;
+  }
+  
+  .mat-header-row {
+    height: 56px;
+  }
+  
+  .mat-row {
+    height: 48px;
+  }
+  
+  .container {
+    padding: 16px;
+  }
+  
+  .product-card {
+    padding: 16px;
+  }
+  
+  .card-footer {
+    padding: 16px;
+  }
+  
+  .mat-table {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .mat-header-row,
+  .mat-row {
+    border-radius: 8px;
+  }
+  

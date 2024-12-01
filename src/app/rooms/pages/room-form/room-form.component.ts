@@ -6,6 +6,7 @@ import { RoomsService } from '../../services/rooms.service';
 import { Category } from 'src/app/categories/interfaces/category';
 import { switchMap } from 'rxjs';
 import { Room } from '../../interfaces/room';
+import { CategoryService } from 'src/app/categories/services/category.service';
 
 @Component({
   selector: 'app-room-form',
@@ -21,7 +22,8 @@ export class RoomFormComponent implements OnInit {
     private activateRouter: ActivatedRoute,
     private router: Router,
     private roomsService: RoomsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private categoryService: CategoryService, // Inyectar el servicio
   ) { }
   public roomForm = new FormGroup({
     id: new FormControl<number | null>(null),
@@ -43,25 +45,15 @@ export class RoomFormComponent implements OnInit {
   }
 
   loadCategories(): void {
-    // Aquí iría el método para cargar las categorías
-    // Por ahora se asume que las categorías se cargan de alguna API
-    this.categories = [
-      {
-        id: 1,
-        name: "Habitación Estándar",
-        description: "Habitación sencilla con baño privado y WiFi"
+    // Llamar al servicio para obtener las categorías
+    this.categoryService.getAllCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
       },
-      {
-        id: 2,
-        name: "Suite Ejecutiva",
-        description: "Habitación de lujo con sala de estar y vistas al mar"
-      },
-      {
-        id: 3,
-        name: "Habitación Doble",
-        description: "Habitación con dos camas individuales y baño privado"
+      error: () => {
+        this.showSnackbar('Error al cargar las categorías');
       }
-    ];
+    });
   }
 
   ngOnInit(): void {
