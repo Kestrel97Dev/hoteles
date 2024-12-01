@@ -46,3 +46,9 @@
 .mat-row {
   border-radius: 8px;
 }
+
+.button-success {
+  background-color: #4caf50; /* Verde Material Design */
+  color: white;
+}
+

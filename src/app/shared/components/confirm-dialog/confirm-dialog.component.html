@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>¿esta seguro ?</h1>
+<div mat-dialog-content>
+  <p>¿esta seguro que desea elimiar a {{data.firstName || data.number}}?</p>
+</div>
+
+<div mat-dialog-actions>
+
+  <button mat-button (click)="onNoClick()">No Borra</button>
+  <span class="spacer"></span>
+  <button mat-button color="primary" (click)="onConfirm()" cdkFocusInitial>Si Borrar</button>
+
+</div>

@@ -1,5 +1,5 @@
 export interface Patients {
-    id: string;                        // ID único para el paciente
+    id: number;                        // ID único para el paciente
     firstName: string;                 // Nombre del paciente
     lastName: string;                  // Apellido del paciente
     gender: Gender;                   // Género del paciente (opcional)

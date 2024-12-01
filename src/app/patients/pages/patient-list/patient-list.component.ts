@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Patients } from '../../interfaces/patients';
 import { PatientsService } from '../../services/patients.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+
 
 @Component({
   selector: 'app-patient-list',
@@ -19,7 +23,11 @@ export class PatientListComponent  implements OnInit{
     'acciones'
   ];
 
-  constructor(private patientsService: PatientsService) {}
+  constructor(
+    private patientsService: PatientsService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     // Cargar los pacientes al iniciar el componente
@@ -32,35 +40,25 @@ export class PatientListComponent  implements OnInit{
     .subscribe(patients => this.patients = patients);
   }
 
-  // Método para agregar un paciente
-  addPatient(patient: Patients): void {
-    this.patientsService.addPatient(patient);
-    this.loadPatients();  // Recargar la lista de pacientes
-  }
-
   // Método para eliminar un paciente
-  deletePatient(id: number): void {
-    this.patientsService.deletePatient(id);
-    this.loadPatients();  // Recargar la lista de pacientes
+  deletePatient(patient: Patients): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: patient, // Pasar la información necesaria al diálogo
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.patientsService.deletePatient(patient.id).subscribe(() => {
+          this.showSnackbar('Paciente eliminado correctamente.');
+          this.loadPatients(); // Recargar la lista de pacientes
+        });
+      }
+    });
   }
-
-  // Método para actualizar un paciente
-  updatePatient(id: number, updatedPatient: Patients): void {
-    this.patientsService.updatePatient(updatedPatient);
-    this.loadPatients();  // Recargar la lista de pacientes
-  }
-
-  showDialogFormAddPatients() {
-    // const dialogRef = this.dialog.open(FormDialogComponent, {
-    //   width: '300px',
-    //   data: { codigo: 0, descripcion: '', precio: 0 }
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.articulos.push(result);
-    //   }
-    // });
+  
+  showSnackbar(message: string): void {
+    this.snackBar.open(message, 'Cerrar', { duration: 3000 });
   }
 
 }

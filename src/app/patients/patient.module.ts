@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PatientListComponent } from './pages/patient-list/patient-list.component';
-import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
 import { PatientFormComponent } from './pages/patiente-form/patient-form.component';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';;
 import { PatientRoutingModule } from './router/patient-routing.module';
 import { PatientsImagePipe } from './pipes/patient-image.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     PatientListComponent,
-    ConfirmDialogComponent,
     PatientFormComponent,
     PatientsImagePipe,
   ],
   imports: [
     CommonModule,
     MaterialModule,
+    SharedModule,
     
     PatientRoutingModule,
   ]
