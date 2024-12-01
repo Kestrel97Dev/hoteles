@@ -1,0 +1,33 @@
+/* Estilos generales del formulario */
+.form-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+    margin-top: 20px;
+  }
+  
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  mat-form-field {
+    margin-bottom: 1rem;
+  }
+  
+  h1 small {
+    font-size: 1rem;
+    color: #757575;
+  }
+  
