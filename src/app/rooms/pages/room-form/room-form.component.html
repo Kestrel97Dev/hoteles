@@ -1,3 +1,10 @@
+<h1>
+  Habitacion
+  <small *ngIf="currentRoom.id"
+    >{{ currentRoom.number }} </small
+  >
+</h1>
+
 <form class="form-grid" [formGroup]="roomForm" (ngSubmit)="onSubmit()">
   <div class="form-section">
     <mat-form-field appearance="outline" class="full-width">
