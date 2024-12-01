@@ -4,6 +4,7 @@ import { CategoryService } from '../../services/category.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from 'src/app/shared/services/confirm-dialog.service';
 
 @Component({
   selector: 'app-category-list',
@@ -23,7 +24,8 @@ export class CategoryListComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private confirmDialogService: ConfirmDialogService
   ) {}
 
   ngOnInit(): void {

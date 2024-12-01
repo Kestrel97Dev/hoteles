@@ -5,6 +5,7 @@ import { PatientsModule } from '../patients/patient.module';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
 import { RoomsModule } from '../rooms/room.module';
+import { CaterotysModule } from '../categories/category.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RoomsModule } from '../rooms/room.module';
     MenuRoutingModule,
 
     PatientsModule,
-    RoomsModule
+    RoomsModule,
+    CaterotysModule,
   ]
 })
 export class LayOutModule { }

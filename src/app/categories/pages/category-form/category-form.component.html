@@ -1,37 +1,36 @@
-<h1>
-    Categoría
-    <small *ngIf="currentCategory.id">{{ currentCategory.name }}</small>
-  </h1>
-  
-  <form class="form-grid" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
-    <div class="form-section">
-      <!-- Campo Nombre -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="name" required />
-        <mat-error *ngIf="categoryForm.controls['name'].hasError('required')">
-          El nombre de la categoría es obligatorio
-        </mat-error>
-      </mat-form-field>
-  
-      <!-- Campo Descripción -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Descripción</mat-label>
-        <textarea matInput formControlName="description"></textarea>
-      </mat-form-field>
-    </div>
-  
-    <div class="form-actions">
-      <!-- Botón Guardar -->
-      <button mat-flat-button color="primary" [disabled]="isSubmitting" type="submit">
-        <mat-icon>save</mat-icon>
-        Guardar
-      </button>
-  
-      <!-- Botón Atrás -->
-      <button mat-raised-button [routerLink]="['/category/list']">
-        Atrás
-      </button>
-    </div>
-  </form>
-  
+<h1 class="title">
+  Categoría
+  <small *ngIf="currentCategory.id">{{ currentCategory.name }}</small>
+</h1>
+
+<form class="form-container" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+  <div class="form-section">
+    <!-- Campo Nombre -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" required />
+      <mat-error *ngIf="categoryForm.controls['name'].hasError('required')">
+        El nombre de la categoría es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Descripción -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="form-actions">
+    <!-- Botón Guardar -->
+    <button mat-flat-button color="primary" [disabled]="isSubmitting" type="submit">
+      <mat-icon>save</mat-icon>
+      Guardar
+    </button>
+
+    <!-- Botón Atrás -->
+    <button mat-raised-button [routerLink]="['/category/list']">
+      Atrás
+    </button>
+  </div>
+</form>

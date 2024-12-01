@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
 import { RoomRoutingModule } from './router/room-routing.module';
-import { RoomListComponent } from './pages/room-list/room-list.component';
 import { RoomFormComponent } from './pages/room-form/room-form.component';
+import { RoomListComponent } from './pages/room-list/room-list.component';
 
 @NgModule({
   declarations: [

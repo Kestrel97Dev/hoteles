@@ -11,7 +11,6 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-
   rooms: Room [] = [];
   displayedColumns: string[] = [
     'Numero',

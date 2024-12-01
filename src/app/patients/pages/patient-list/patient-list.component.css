@@ -1,7 +1,8 @@
-.th-tittle{
-  background-color: #1976d2;
-  color: white;
+.th-tittle {
+  background-color: #1976d2 !important;
+  color: white !important;
 }
+
 
 .button-warn {
   background-color: yellow;

@@ -1,94 +1,105 @@
-<h1>
-  Paciente
-  <small *ngIf="currentPatients.id"
-    >{{ currentPatients.firstName }} {{ currentPatients.lastName }}</small
+<div class="patient-container">
+  <h1 class="title">
+    Paciente
+    <small *ngIf="currentPatients.id">
+      {{ currentPatients.firstName }} {{ currentPatients.lastName }}
+    </small>
+  </h1>
+
+  <mat-divider></mat-divider>
+
+  <div class="image-container">
+    <mat-card class="profile-card">
+      <img
+        [src]="currentPatients | patientsImage"
+        alt="foto del paciente"
+        mat-card-image
+        class="profile-image"
+      />
+    </mat-card>
+  </div>
+
+  <form
+    class="patient-form"
+    [formGroup]="patientForm"
+    (ngSubmit)="onSubmit()"
   >
-</h1>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="firstName" required />
+        <mat-error *ngIf="patientForm.controls['firstName'].hasError('required')">
+          El nombre es obligatorio
+        </mat-error>
+      </mat-form-field>
 
-<mat-divider></mat-divider>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastName" required />
+        <mat-error *ngIf="patientForm.controls['lastName'].hasError('required')">
+          El apellido es obligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-<div class="image-container">
-  <mat-card>
-    <img
-      [src]="currentPatients | patientsImage"
-      alt="foto del paciente"
-      mat-card-image
-    />
-  </mat-card>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Género</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="male">Masculino</mat-option>
+          <mat-option value="female">Femenino</mat-option>
+          <mat-option value="other">Otro</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate" required />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="patientForm.controls['birthDate'].hasError('required')">
+          La fecha de nacimiento es obligatoria
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nacionalidad</mat-label>
+        <input matInput formControlName="nationality" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="phoneNumber" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="address" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Información Médica</mat-label>
+      <textarea matInput formControlName="medicalInfo"></textarea>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-flat-button color="primary" [disabled]="isSubmitting">
+        <mat-icon>save</mat-icon>
+        Guardar
+      </button>
+      <button mat-raised-button color="accent" [routerLink]="['/patient/list']">
+        Atrás
+      </button>
+    </div>
+  </form>
 </div>
-
-<form class="form-grid" [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-  <div>
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="firstName" required />
-      <mat-error *ngIf="patientForm.controls['firstName'].hasError('required')">
-        El nombre es obligatorio
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Género</mat-label>
-      <mat-select formControlName="gender">
-        <mat-option value="male">Masculino</mat-option>
-        <mat-option value="female">Femenino</mat-option>
-        <mat-option value="other">Otro</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Nacionalidad</mat-label>
-      <input matInput formControlName="nationality" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Teléfono</mat-label>
-      <input matInput formControlName="phoneNumber" />
-    </mat-form-field>
-  </div>
-
-  <div>
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Apellido</mat-label>
-      <input matInput formControlName="lastName" required />
-      <mat-error *ngIf="patientForm.controls['lastName'].hasError('required')">
-        El apellido es obligatorio
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Fecha de Nacimiento</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="birthDate" required />
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="patientForm.controls['birthDate'].hasError('required')">
-        La fecha de nacimiento es obligatoria
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Dirección</mat-label>
-      <input matInput formControlName="address" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="email" />
-    </mat-form-field>
-  </div>
-
-  <!-- Campo de Información Médica (ocupa el largo de las dos columnas internas) -->
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Información Médica</mat-label>
-    <textarea matInput formControlName="medicalInfo"></textarea>
-  </mat-form-field>
-
-  <!-- Botón Guardar y alineación -->
-  <div class="form-actions">
-    <button mat-flat-button color="primary" [disabled]="isSubmitting">
-      <mat-icon>save</mat-icon>
-      Guardar
-    </button>
-    <button mat-raised-button [routerLink]="['/patient/list']">Atras</button>
-  </div>
-</form>
